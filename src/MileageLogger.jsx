@@ -297,8 +297,20 @@ function Header({ lastMileage, lastMileageMeta, activeTrip }) {
   return (
     <div className="px-5 pt-6 pb-5 bg-gradient-to-b from-slate-900 to-slate-950 border-b border-slate-800">
       <div className="flex items-center justify-between mb-3">
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-amber-400/10 border border-amber-400/30 flex items-center justify-center">
+        <div className="flex items-center gap-3">
+          {/* Logo Image - Replace with your company logo */}
+          <img 
+            src="/logo.png" 
+            alt="Company Logo" 
+            className="h-8 w-auto"
+            onError={(e) => {
+              // Fallback to icon if logo doesn't exist
+              e.target.style.display = 'none';
+              e.target.nextElementSibling?.classList.remove('hidden');
+            }}
+          />
+          {/* Fallback icon */}
+          <div className="w-8 h-8 rounded-lg bg-amber-400/10 border border-amber-400/30 flex items-center justify-center hidden">
             <Gauge size={16} className="text-amber-400" />
           </div>
           <span className="text-sm font-semibold tracking-wide text-slate-300">Logbook</span>
@@ -354,7 +366,7 @@ function LogTab({ activeTrip, recentTrips, onStart, onEnd, onFull, onViewAll, on
       ) : (
         <button
           onClick={onStart}
-          className="w-full py-5 rounded-2xl bg-amber-400 text-slate-950 font-bold text-base flex items-center justify-center gap-2 active:scale-95 transition-transform shadow-lg shadow-amber-400/10"
+          className="w-full py-5 rounded-2xl bg-amber-400 text-slate-950 font-bold text-base flex items-center justify-center gap-2 active:scale-95 transition-transform shadow-lg shadow-amber-400/50"
         >
           <Car size={20} /> Start Trip
         </button>
